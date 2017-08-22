@@ -1,0 +1,17 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "norsecraft:runes/runestone"
+        },
+        "model": "norsecraft:cube_overlay_side",
+        "uvlock": true
+    },
+    "variants": {
+        "normal": [{
+            "textures": {
+                "overlay": "norsecraft:runes/fehu"
+            }
+        }]
+    }
+}
