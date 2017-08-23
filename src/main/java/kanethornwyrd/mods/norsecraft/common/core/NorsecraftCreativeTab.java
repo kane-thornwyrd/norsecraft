@@ -2,9 +2,7 @@ package kanethornwyrd.mods.norsecraft.common.core;
 
 import kanethornwyrd.mods.norsecraft.common.itemAndBlocks.ModItems;
 import kanethornwyrd.mods.norsecraft.common.lib.LibMisc;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
@@ -35,8 +33,4 @@ public final class NorsecraftCreativeTab extends CreativeTabs {
         return false;
     }
 
-    @Override
-    public void displayAllRelevantItems(@Nonnull NonNullList<ItemStack> list) {
-        this.list = list;
-    }
 }

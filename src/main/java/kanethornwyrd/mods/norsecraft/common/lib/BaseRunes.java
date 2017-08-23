@@ -3,7 +3,6 @@ package kanethornwyrd.mods.norsecraft.common.lib;
 import kanethornwyrd.mods.norsecraft.common.itemAndBlocks.BlockRune;
 import kanethornwyrd.mods.norsecraft.common.itemAndBlocks.ItemRune;
 import net.minecraft.block.Block;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.HashMap;
@@ -107,7 +106,7 @@ public final class BaseRunes {
 
     private static final void injectBlocks(String name, BaseRune rune, IForgeRegistry<Block> registry){
         if(null == block){
-            block = new BlockRune(collection);
+            block = new BlockRune();
             block.setUnlocalizedName(name);
             registry.register(block);
         }

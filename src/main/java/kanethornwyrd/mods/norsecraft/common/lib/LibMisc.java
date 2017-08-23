@@ -8,7 +8,7 @@ public class LibMisc {
     public static final String BUILD = "GRADLE:BUILD";
     public static final String VERSION_ID = "GRADLE:VERSION";
     public static final String VERSION = VERSION_ID + "-" + BUILD;
-    public static final String DEPENDENCIES = "required-after:baubles;after:forge@[14.21.1.2443,)";
+    public static final String DEPENDENCIES = "after:NotEnoughItems;required-after:baubles;after:forge@[14.21.1.2443,)";
     public static final String MC_VERSION = "[1.12,1.13)";
 
 

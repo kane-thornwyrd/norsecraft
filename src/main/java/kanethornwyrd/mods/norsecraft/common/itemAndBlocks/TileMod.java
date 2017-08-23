@@ -1,4 +1,4 @@
-package kanethornwyrd.mods.norsecraft.common.itemAndBlocks.tile;
+package kanethornwyrd.mods.norsecraft.common.itemAndBlocks;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

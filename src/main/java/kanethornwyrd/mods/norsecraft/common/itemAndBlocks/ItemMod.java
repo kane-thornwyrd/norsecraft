@@ -15,8 +15,20 @@ import javax.annotation.Nonnull;
 
 public abstract class ItemMod extends Item implements IModelRegister {
 
+    protected String name;
+
     public ItemMod(String name) {
+        setName(name);
         setUnlocalizedName(name);
+        setRegistryName(name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Nonnull
@@ -25,11 +37,13 @@ public abstract class ItemMod extends Item implements IModelRegister {
         return super.getUnlocalizedNameInefficiently(par1ItemStack).replaceAll("item\\.", "itemAndBlocks." + LibResources.PREFIX_MOD);
     }
 
+    public void registerItemModel() {
+        Norsecraft.proxy.registerItemRenderer(this, 0, getName());
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerModels() {
-        Norsecraft.logger.warn("========================================>" + new ModelResourceLocation(getRegistryName(), "inventory").toString());
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 

@@ -1,7 +1,9 @@
 package kanethornwyrd.mods.norsecraft.common.itemAndBlocks;
 
-import kanethornwyrd.mods.norsecraft.common.core.NorsecraftCreativeTab;
+import kanethornwyrd.mods.norsecraft.Norsecraft;
 import kanethornwyrd.mods.norsecraft.common.lib.LibIndexedAABB;
+import kanethornwyrd.mods.norsecraft.common.lib.LibMisc;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,10 +13,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -23,38 +26,32 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BlockMod extends Block {
+public abstract class BlockMod<TE extends TileEntity> extends Block {
+    protected String name;
+
     public BlockMod(Material par2Material, String name) {
         super(par2Material);
+        this.setName(name);
         setUnlocalizedName(name);
-        setDefaultState(pickDefaultState());
-        if(registerInCreative())
-            setCreativeTab(NorsecraftCreativeTab.INSTANCE);
+        setRegistryName(name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     protected Block setSoundType(SoundType p_setSoundType_1_) {
         return super.setSoundType(p_setSoundType_1_);
-    }
-
-    protected IBlockState pickDefaultState() {
-        return blockState.getBaseState();
-    }
-
-    protected boolean registerInCreative() { return true; }
-
-    public boolean shouldRegister(){ return true; }
-
-    public CreativeTabs getCreativeTabToDisplayOn(){
-        return NorsecraftCreativeTab.INSTANCE;
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return "tile." + getRegistryName();
     }
 
     public void addBoxes(IBlockState state, World world, BlockPos pos, List<AxisAlignedBB> boxes) {
@@ -71,6 +68,7 @@ public abstract class BlockMod extends Block {
 
 
     @Override
+    @ParametersAreNonnullByDefault
     public RayTraceResult collisionRayTrace(IBlockState state, World world, BlockPos pos, Vec3d start, Vec3d end) {
         List<AxisAlignedBB> boxes = new ArrayList<>();
         addSelectionBoxes(state, world, pos, boxes);
@@ -123,13 +121,11 @@ public abstract class BlockMod extends Block {
 
     @Deprecated
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing,
                                     float hitX, float hitY, float hitZ) {
         RayTraceResult hit = rayTrace(state, world, pos, player);
-        if (hit == null) {
-            return false;
-        }
-        return onBlockActivated(world, pos, state, player, hand, hit);
+        return hit != null && onBlockActivated(world, pos, state, player, hand, hit);
     }
 
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, RayTraceResult hit) {
@@ -176,6 +172,7 @@ public abstract class BlockMod extends Block {
         return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 
+    @SideOnly(Side.CLIENT)
     protected final RayTraceResult rayTrace(IBlockState state, World world, BlockPos pos, EntityPlayer entity) {
         float partialTicks = 0;
         double reach = world.isRemote ? getClientReach() : ((EntityPlayerMP) entity).interactionManager.getBlockReachDistance();
@@ -189,4 +186,34 @@ public abstract class BlockMod extends Block {
     private double getClientReach() {
         return Minecraft.getMinecraft().playerController.getBlockReachDistance();
     }
+
+
+    public void registerItemModel(Item itemBlock) {
+        Norsecraft.proxy.registerItemRenderer(itemBlock, 0, name);
+    }
+
+    public ItemBlock createItemBlock() {
+        ItemBlock ib = new ItemBlock(this);
+        ib.setRegistryName(this.getName());
+        ib.setUnlocalizedName(LibMisc.MOD_ID + "." + this.name);
+        ib.setCreativeTab(Norsecraft.creativeTab);
+        return ib;
+    }
+
+    @Override
+    @MethodsReturnNonnullByDefault
+    public BlockMod setCreativeTab(CreativeTabs tab) {
+        super.setCreativeTab(tab);
+        return this;
+    }
+
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return false;
+    }
+
+    public Class<TE> getTileEntityClass() {
+        return null;
+    }
+
 }

@@ -1,6 +1,6 @@
 package kanethornwyrd.mods.norsecraft.common.core.helper;
 
-import kanethornwyrd.mods.norsecraft.common.itemAndBlocks.tile.TileSimpleInventory;
+import kanethornwyrd.mods.norsecraft.common.itemAndBlocks.TileSimpleInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

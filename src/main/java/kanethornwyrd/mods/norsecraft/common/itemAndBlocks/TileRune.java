@@ -1,4 +1,4 @@
-package kanethornwyrd.mods.norsecraft.common.itemAndBlocks.tile;
+package kanethornwyrd.mods.norsecraft.common.itemAndBlocks;
 
 import elucent.albedo.lighting.ILightProvider;
 import elucent.albedo.lighting.Light;
@@ -11,9 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @Optional.Interface(iface="elucent.albedo.lighting.ILightProvider", modid="albedo")
 public class TileRune extends TileMod implements ILightProvider {
 
-
     public static final String TAG_RUNE_TYPE = "runeType";
-    String type = "fehu";
+    String type = BaseRunes.collection.keySet().toArray()[0].toString();
 
     @Override
     public void writePacketNBT(NBTTagCompound nbt) {
@@ -32,29 +31,10 @@ public class TileRune extends TileMod implements ILightProvider {
         return radius * (float)Math.sin(Math.toRadians(angleDeg)) +  this.pos.getZ() + radius;
     }
 
-    private Integer currentAngle = 0;
-    private final Float getAngle(){
-        if(this.currentAngle >= 359) this.currentAngle = 0;
-        this.currentAngle ++;
-        return (float) this.currentAngle+1;
-    }
-    private Float currentRadius = 1f;
-    private Float currentIterator = 0f;
-    private final Float getRadius(){
-        if(this.currentIterator >= Math.PI*10) this.currentIterator = 0f;
-        this.currentIterator += (float) Math.PI/2000;
-
-        this.currentRadius = (float) Math.cos(this.currentIterator);
-        return this.currentRadius;
-    }
-
     @Override
     @Optional.Method(modid="albedo")
     @SideOnly(Side.CLIENT)
     public Light provideLight() {
-
-        Float angle = this.getAngle();
-
         return Light.builder()
                 .pos(
                         this.pos.getX() +0.5,
@@ -65,7 +45,7 @@ public class TileRune extends TileMod implements ILightProvider {
                         BaseRunes.collection.get(this.getRuneName().toUpperCase()).getColor(),
                         false
                 )
-                .radius(this.getRadius() + 2f)
+                .radius(1f)
                 .build();
     }
 

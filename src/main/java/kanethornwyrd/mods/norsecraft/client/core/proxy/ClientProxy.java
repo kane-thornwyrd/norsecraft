@@ -37,7 +37,7 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void init(FMLInitializationEvent event) {
-        // MinecraftForge.EVENT_BUS.register(HUDHandler.class);
+        // MinecraftForge.EVENT_BUS.registerBlocks(HUDHandler.class);
     }
 
     @Override
