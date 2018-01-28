@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "norsecraft:grandOakBark"
+    }
+  ],
+  "result": {
+    "item": "norsecraft:grandOakPlank",
+    "count": 4,
+    "data": 0
+  }
+}

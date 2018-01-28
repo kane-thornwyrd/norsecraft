@@ -1,0 +1,46 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+          "all": "norsecraft:runes/runestone",
+          "particle": "norsecraft:runes/runestone",
+          "overlay": "norsecraft:runes/ansuz"
+        },
+      "model": "norsecraft:cube_overlay_side"
+    },
+    "variants": {
+        "normal": [{
+            "textures": {
+            }
+        }
+        ],
+      "axis=y": {
+        "x": 0
+      },
+      "axis=x": {
+        "x": 90,
+        "y": 90
+      },
+      "axis=z": {
+        "x": 90
+      },
+      "runetype=ansuz": {
+        "overlay": "norsecraft:runes/ansuz"
+      },
+      "runetype=berkanan": {
+        "overlay": "norsecraft:runes/berkanan"
+      },
+      "runetype=dagaz": {
+        "overlay": "norsecraft:runes/dagaz"
+      },
+      "runetype=ehwaz": {
+        "overlay": "norsecraft:runes/ehwaz"
+      },
+      "runetype=eihwaz": {
+        "overlay": "norsecraft:runes/eihwaz"
+      },
+      "runetype=fehu": {
+        "overlay": "norsecraft:runes/fehu"
+      }
+    }
+}

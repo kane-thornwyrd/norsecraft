@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:half_slab",
+    "textures": {
+      "bottom": "norsecraft:plank/weirwood",
+      "top": "norsecraft:plank/weirwood",
+      "side": "norsecraft:plank/weirwood"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "half=top": [{
+      "x": 180,
+      "uvlock": true
+    }],
+    "half=bottom": [{}],
+    "inventory": [{}]
+  }
+}

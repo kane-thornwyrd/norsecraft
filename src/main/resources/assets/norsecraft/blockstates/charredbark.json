@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "sides": "norsecraft:bark/charred",
+      "top": "norsecraft:bark/charred_top",
+      "particle": "norsecraft:bark/charred_top"
+    },
+    "model": "norsecraft:log"
+  },
+  "variants": {
+    "inventory": {
+      "x": 0
+    },
+    "axis=y": {
+      "x": 0
+    },
+    "axis=x": {
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "x": 90
+    }
+  }
+}

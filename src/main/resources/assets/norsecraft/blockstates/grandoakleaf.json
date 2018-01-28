@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "norsecraft:grandoakleaf",
+    "textures": {
+      "0": "norsecraft:leaf/grandoak",
+      "particle": "norsecraft:leaf/grandoak"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "check_decay=true,decayable=true": [
+      {}
+    ],
+    "check_decay=false,decayable=true": [
+      {}
+    ],
+    "check_decay=false,decayable=false": [
+      {}
+    ],
+    "check_decay=true,decayable=false": [
+      {}
+    ]
+  }
+}

@@ -1,0 +1,217 @@
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"textures": {
+      "runestone": "norsecraft:runes/runestone",
+      "overlay": "norsecraft:runes/fehu",
+      "particle": "norsecraft:runes/runestone"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+          "to": [
+            16,
+            16,
+            16
+          ],
+			"faces": {
+              "north": {
+                "uv": [
+                  0,
+                  0,
+                  16,
+                  16
+                ],
+                "texture": "#runestone"
+              },
+              "east": {
+                "uv": [
+                  0,
+                  0,
+                  16,
+                  16
+                ],
+                "texture": "#runestone"
+              },
+              "south": {
+                "uv": [
+                  0,
+                  0,
+                  16,
+                  16
+                ],
+                "texture": "#runestone"
+              },
+              "west": {
+                "uv": [
+                  0,
+                  0,
+                  16,
+                  16
+                ],
+                "texture": "#runestone"
+              },
+              "up": {
+                "uv": [
+                  0,
+                  0,
+                  16,
+                  16
+                ],
+                "texture": "#runestone"
+              },
+              "down": {
+                "uv": [
+                  0,
+                  0,
+                  16,
+                  16
+                ],
+                "texture": "#runestone"
+              }
+            }
+        },
+      {
+        "from": [
+          0,
+          0,
+          0
+        ],
+        "to": [
+          16,
+          16,
+          16
+        ],
+        "faces": {
+          "north": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "north"
+          },
+          "south": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "south"
+          },
+          "west": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "west"
+          },
+          "east": {
+            "uv": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "texture": "#overlay",
+            "cullface": "east"
+          }
+        }
+      }
+	],
+	"display": {
+		"thirdperson_righthand": {
+          "scale": [
+            0.30000000000000004,
+            0.30000000000000004,
+            0.30000000000000004
+          ],
+			"rotation": [0, 0, 0],
+          "translation": [
+            0,
+            1.5,
+            0
+          ]
+		},
+      "thirdperson_lefthand": {
+			"scale": [
+              0.30000000000000004,
+              0.30000000000000004,
+              0.30000000000000004
+			],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          1.5,
+          0
+        ]
+		},
+      "firstperson_righthand": {
+        "scale": [
+          0.3,
+          0.3,
+          0.3
+        ]
+      },
+		"firstperson_lefthand": {
+          "scale": [
+            0.3,
+            0.3,
+            0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+		},
+      "head": {
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "ground": {
+        "scale": [
+          0.3,
+          0.3,
+          0.3
+        ]
+      },
+      "fixed": {
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "gui": {
+        "scale": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "rotation": [
+          30,
+          -45,
+          0
+        ]
+      }
+	}
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "norsecraft:grandOakSlab",
+  "pattern": [
+    "A",
+    "A"
+  ],
+  "key": {
+    "A": {
+      "item": "norsecraft:grandOakSlab",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "norsecraft:grandOakPlank",
+    "count": 1,
+    "data": 0
+  }
+}

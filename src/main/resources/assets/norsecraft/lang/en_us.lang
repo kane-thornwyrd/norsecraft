@@ -1,0 +1,4 @@
+norsecraftmisc.helloworld=Hello World !
+itemGroup.norsecraft=Norsecraft
+item.norsecraft:Norsecraft.name=Norsecraft
+tile.norsecraft:rune.name=Rune

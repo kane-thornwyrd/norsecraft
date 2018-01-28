@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "norsecraft:grandOakStairs",
+  "pattern": [
+    "AAA",
+    "A A",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "norsecraft:grandOakStairs",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "norsecraft:grandOakPlank",
+    "count": 8,
+    "data": 0
+  }
+}

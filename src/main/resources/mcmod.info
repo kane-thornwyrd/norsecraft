@@ -1,0 +1,16 @@
+[
+{
+  "modid": "norsecraft",
+  "name": "Norsecraft",
+  "description": "Be ready to fight in the north.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["kanethornwyrd"],
+  "credits": "Vazkii, Amadornes, AEnterprise, afdw, AlexIIL, ChickenBones, PowerCrystals, cpw",
+  "logoFile": "assets/norsecraft/textures/logo.small.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
