@@ -16,10 +16,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+
+import static kanethornwyrd.mods.norsecraft.Misc.MOD_ID;
+
 public abstract class ItemMod extends Item implements IVariantHolder {
 public static final List<IVariantHolder> variantHolders = new ArrayList();
 private final String[] variants;
 private final String bareName;
+
+
+@Override
+public String getModNamespace() {
+  return MOD_ID;
+}
 
 public ItemMod( String name, String... variants ) {
   this.setUnlocalizedName(name);

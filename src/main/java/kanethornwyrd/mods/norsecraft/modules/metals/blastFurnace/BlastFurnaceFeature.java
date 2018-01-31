@@ -9,13 +9,19 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 
+
+import static kanethornwyrd.mods.norsecraft.modules.metals.BlockNames.BLASTFURNACE;
+
+
+import static kanethornwyrd.mods.norsecraft.modules.metals.BlockNames.BLASTFURNACELIT;
+
+
 public class BlastFurnaceFeature extends Feature {
 
 public static Block blastFurnace;
 
 @Override
 public void preInit( FMLPreInitializationEvent event ) {
-  NetworkRegistry.INSTANCE.registerGuiHandler(Norsecraft.INSTANCE, new ModGuiHandler());
   blastFurnace = new BlastFurnace().setCreativeTab(Norsecraft.creativeTab);
 }
 
