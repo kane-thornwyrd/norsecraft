@@ -13,4 +13,10 @@ public void addFeatures() {
 public String getModuleDescription() {
   return "The Core of Norsecraft";
 }
+
+
+@Override
+public boolean canBeDisabled() {
+  return false;
+}
 }

@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "sides": "norsecraft:bark/grandoak",
+      "top": "norsecraft:bark/grandoak_top",
+      "particle": "norsecraft:bark/grandoak_top"
+    },
+    "model": "norsecraft:blastfurnace"
+  },
+  "variants": {
+    "inventory": { "y": 0, "uvlock": true },
+    "facing=south": { "y": 180, "uvlock": true },
+    "facing=east": { "y": 90, "uvlock": true },
+    "facing=west": { "y": -90, "uvlock": true },
+    "facing=north": { "y": 0, "uvlock": true }
+  }
+}

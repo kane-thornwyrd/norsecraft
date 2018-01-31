@@ -8,18 +8,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.datafix.walkers.ItemStackDataLists;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Optional;
@@ -92,17 +92,30 @@ public static int getItemBurnTime( ItemStack stack ) {
   return 0;
 }
 
+private Float currentRadius = 1f;
+private Float currentIterator = 0f;
+private final Float getRadius(){
+  if(this.currentIterator >= Math.PI*2) this.currentIterator = 0f;
+  this.currentIterator += (float) Math.PI/1000;
+  
+  this.currentRadius = (float) Math.cos(Math.sin(this.currentIterator/5)*this.currentIterator);
+  return this.currentRadius;
+}
+
 @Optional.Method(modid = "mirage")
 @Override
 public void gatherLights( GatherLightsEvent evt ) {
-  if(this.isBurning()) {
+  if (this.isBurning()) {
     evt.add(Light.builder()
                  .pos(this.getPos())
-                 .color(1, 1, 0)
-                 .radius(3)
+                 .color(1, 0.2f, 0, 0.5f)
+                 .radius(getRadius() + 3)
                  .build());
   }
-  
+}
+
+public boolean isBurning() {
+  return this.furnaceBurnTime > 0;
 }
 
 public boolean hasFuelEmpty() {
@@ -215,6 +228,7 @@ public void clear() {
 }
 
 public int getCookTime( ItemStack stack ) {
+  System.out.println(stack);
   return 2000;
 }
 
@@ -259,7 +273,7 @@ public void readFromNBT( NBTTagCompound compound ) {
 }
 
 public int getSizeInventory() {
-  return 64;
+  return 4;
 }
 
 public boolean isEmpty() {
@@ -315,18 +329,7 @@ public void update() {
     
     if (flag != this.isBurning()) {
       flag1 = true;
-      
-      BlockPos pos = this.getPos();
-      double d0 = (double) pos.getX() + 0.5D;
-      double d1 = (double) pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
-      double d2 = (double) pos.getZ() + 0.5D;
-      double d4 = rand.nextDouble() * 0.6D - 0.3D;
 
-//      if (rand.nextDouble() < 0.1D) {
-      world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
-//      }
-      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1 + d4, d2, 0.0D, 0.5D, 0.0D, new int[ 0 ]);
-      world.spawnParticle(EnumParticleTypes.FLAME, d0, d1 + d4, d2, 0.0D, 0.5D, 0.0D, new int[ 0 ]);
 //      BlockFurnace.setState(this.isBurning(), this.world, this.pos);
     }
   }
@@ -335,11 +338,6 @@ public void update() {
     this.markDirty();
   }
   
-}
-
-
-public boolean isBurning() {
-  return this.furnaceBurnTime > 0;
 }
 
 private boolean canSmelt() {

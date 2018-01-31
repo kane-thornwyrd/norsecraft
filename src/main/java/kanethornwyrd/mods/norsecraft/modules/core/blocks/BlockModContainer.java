@@ -17,7 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class BlockModContainer extends BlockMod implements ITileEntityProvider {
+public abstract class BlockModContainer extends ModBlock implements ITileEntityProvider {
 
 public BlockModContainer(String name, Material materialIn, String... variants) {
   super(name, materialIn, variants);

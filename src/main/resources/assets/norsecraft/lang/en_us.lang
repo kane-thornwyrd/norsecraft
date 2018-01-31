@@ -1,4 +1,26 @@
 norsecraftmisc.helloworld=Hello World !
 itemGroup.norsecraft=Norsecraft
+
 item.norsecraft:Norsecraft.name=Norsecraft
 tile.norsecraft:rune.name=Rune
+
+tile.norsecraft:weirwoodPlank.name=Weirwood Planks
+tile.norsecraft:weirwoodSlab.name=Weirwood Slab
+tile.norsecraft:weirwoodStairs.name=Weirwood Stairs
+tile.norsecraft:weirwoodBark.name=Weirwood Wood
+tile.norsecraft:weirwoodSapling.name=Weirwood Sapling
+tile.norsecraft:weirwoodLeaf.name=Weirwood Leaves
+
+tile.norsecraft:grandOakPlank.name=Grand Oak Planks
+tile.norsecraft:grandOakSlab.name=Grand Oak Slab
+tile.norsecraft:grandOakStairs.name=Grand Oak Stairs
+tile.norsecraft:grandOakBark.name=Grand Oak Wood
+tile.norsecraft:grandOakSapling.name=Grand Oak Sapling
+tile.norsecraft:grandOakLeaf.name=Grand Oak Leaves
+
+item.norsecraft:steel_ingot.name=Steel Ingot
+
+item.norsecraft:dragonglass_ingot.name=Dragonglass Ingot
+
+tile.norsecraft:blastFurnace.name=Blast Furnace
+blastFurnace=Blast Furnace

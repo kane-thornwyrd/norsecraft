@@ -29,12 +29,14 @@ import static kanethornwyrd.mods.norsecraft.modules.metals.BlockNames.BLASTFURNA
 public class BlastFurnace extends BlockFacing {
 Random random;
 
+
 public BlastFurnace() {
-  super(BLASTFURNACE, Material.IRON);
+  super(BLASTFURNACE, Material.IRON, BLASTFURNACE);
   setHardness(5.0F);
   setResistance(10.0F);
   setSoundType(SoundType.METAL);
   setCreativeTab(Norsecraft.creativeTab.INSTANCE);
+  setLightLevel(0.5F);
   GameRegistry.registerTileEntity(TileEntityBlastFurnace.class, MOD_ID + ":" + BLASTFURNACE);
   random = new Random();
 }
@@ -61,11 +63,6 @@ public boolean isFullBlock( IBlockState state ) {
 }
 
 @Override
-public EnumBlockRenderType getRenderType( IBlockState state ) {
-  return EnumBlockRenderType.MODEL;
-}
-
-@Override
 public boolean isOpaqueCube( IBlockState state ) {
   return false;
 }
@@ -84,7 +81,13 @@ public boolean onBlockActivated( World worldIn, BlockPos pos, IBlockState state,
 }
 
 @Override
+public EnumBlockRenderType getRenderType( IBlockState state ) {
+  return EnumBlockRenderType.MODEL;
+}
+
+@Override
 public void onBlockPlacedBy( World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack ) {
+  worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
   if (stack.hasDisplayName()) {
     TileEntity tileentity = worldIn.getTileEntity(pos);
     
@@ -99,7 +102,7 @@ public void breakBlock( World par1World, BlockPos pos, IBlockState state ) {
   TileSimpleInventory inv = (TileSimpleInventory) par1World.getTileEntity(pos);
   TileEntity te = par1World.getTileEntity(pos);
   
-  if (inv != null && te instanceof TileEntityBlastFurnace) {
+  if (inv != null && te instanceof TileEntityBlastFurnace && !inv.isEmpty()) {
     InventoryHelper.dropInventoryItems(par1World, pos, inv);
   }
   

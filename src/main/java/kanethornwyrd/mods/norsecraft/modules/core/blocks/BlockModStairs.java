@@ -59,7 +59,4 @@ public IProperty getVariantProp() {
 public Class getVariantEnum() {
   return null;
 }
-
-public static void initStairs(Block base, int meta, BlockStairs block) {
-}
 }

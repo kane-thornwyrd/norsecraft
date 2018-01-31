@@ -55,8 +55,8 @@ protected void drawGuiContainerBackgroundLayer( float partialTicks, int mouseX, 
   if (this.tile.isBurning()) {
     int burningTime = this.tile.getField(0);
     int textureHeight = (int) (14f / currentItemBurnTime * furnaceBurnTime);
-    this.drawTexturedModalRect(x + 57, y + 36 + 14 - textureHeight,
-                               177, 14 - textureHeight, 14, textureHeight);
+    this.drawTexturedModalRect(x + 56, y + 36 + 14 - textureHeight,
+                               176, 14 - textureHeight, 16, textureHeight);
   }
 }
 }
