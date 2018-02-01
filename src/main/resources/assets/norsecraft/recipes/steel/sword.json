@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "norsecraft:steel_sword",
+  "pattern": [
+    "A",
+    "A",
+    "S"
+  ],
+  "key": {
+    "A": {
+      "item": "norsecraft:steel_ingot",
+      "data": 0
+    },
+    "S": {
+      "item": "minecraft:stick",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "norsecraft:steel_sword",
+    "count": 1,
+    "data": 0
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "norsecraft:weirwoodSlab",
+  "pattern": [
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "norsecraft:weirwoodPlank",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "norsecraft:weirwoodSlab",
+    "count": 6,
+    "data": 0
+  }
+}

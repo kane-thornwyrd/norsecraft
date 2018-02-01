@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "norsecraft:dragonglass_sword",
+  "pattern": [
+    "A",
+    "A",
+    "S"
+  ],
+  "key": {
+    "A": {
+      "item": "norsecraft:dragonglass_ingot",
+      "data": 0
+    },
+    "S": {
+      "item": "minecraft:stick",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "norsecraft:dragonglass_sword",
+    "count": 1,
+    "data": 0
+  }
+}
