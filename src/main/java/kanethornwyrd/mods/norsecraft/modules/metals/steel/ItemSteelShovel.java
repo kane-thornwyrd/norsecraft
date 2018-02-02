@@ -4,8 +4,8 @@ import kanethornwyrd.mods.norsecraft.modules.core.items.ItemModSpade;
 import net.minecraft.item.ItemStack;
 
 import static kanethornwyrd.mods.norsecraft.modules.metals.ItemNames.STEELSHOVEL;
-import static kanethornwyrd.mods.norsecraft.modules.metals.steel.SteelFeature.steelIngot;
-import static kanethornwyrd.mods.norsecraft.modules.metals.steel.SteelFeature.steelMaterial;
+import static kanethornwyrd.mods.norsecraft.modules.metals.features.Steel.steelIngot;
+import static kanethornwyrd.mods.norsecraft.modules.metals.features.Steel.steelMaterial;
 
 
 public class ItemSteelShovel extends ItemModSpade {

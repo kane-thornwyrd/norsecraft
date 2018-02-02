@@ -13,9 +13,6 @@ import java.util.Map;
 
 
 
-import static kanethornwyrd.mods.norsecraft.modules.metals.steel.SteelFeature.steelIngot;
-
-
 public class RecipesBlastFurnace {
 private static final HashMap<ItemStack[], ItemStack> recipes = new HashMap<ItemStack[], ItemStack>();
 

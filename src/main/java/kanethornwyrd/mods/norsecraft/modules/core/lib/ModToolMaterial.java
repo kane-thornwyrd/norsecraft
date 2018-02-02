@@ -1,15 +1,15 @@
 package kanethornwyrd.mods.norsecraft.modules.core.lib;
 
-import kanethornwyrd.mods.norsecraft.modules.metals.dragonglass.DragonglassFeature;
-import kanethornwyrd.mods.norsecraft.modules.metals.steel.SteelFeature;
+import kanethornwyrd.mods.norsecraft.modules.metals.features.Dragonglass;
+import kanethornwyrd.mods.norsecraft.modules.metals.features.Steel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ModToolMaterial {
 
 public static enum ModMaterials {
-  STEEL(2, 500, 7.0F, 2.5F, 14, SteelFeature.steelIngot),
-  DRAGONGLASS(4, 3122, 16.0F, 4.0F, 44, DragonglassFeature.dragonglassIngot);
+  STEEL(2, 500, 7.0F, 2.5F, 14, Steel.steelIngot),
+  DRAGONGLASS(4, 3122, 16.0F, 4.0F, 44, Dragonglass.dragonglassIngot);
 //  WOOD(0, 59, 2.0F, 0.0F, 15),
 //  STONE(1, 131, 4.0F, 1.0F, 5),
 //  IRON(2, 250, 6.0F, 2.0F, 14),

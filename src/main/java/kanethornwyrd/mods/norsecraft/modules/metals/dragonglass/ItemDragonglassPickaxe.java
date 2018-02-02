@@ -5,8 +5,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import static kanethornwyrd.mods.norsecraft.modules.metals.ItemNames.DRAGONGLASSPICKAXE;
-import static kanethornwyrd.mods.norsecraft.modules.metals.dragonglass.DragonglassFeature.dragonglassIngot;
-import static kanethornwyrd.mods.norsecraft.modules.metals.dragonglass.DragonglassFeature.dragonglassMaterial;
+import static kanethornwyrd.mods.norsecraft.modules.metals.features.Dragonglass.dragonglassIngot;
+import static kanethornwyrd.mods.norsecraft.modules.metals.features.Dragonglass.dragonglassMaterial;
 
 
 public class ItemDragonglassPickaxe extends ItemModPickaxe {

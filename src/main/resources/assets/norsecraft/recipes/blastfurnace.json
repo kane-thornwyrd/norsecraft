@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "norsecraft:blastfurnace",
+  "pattern": [
+    "III",
+    "BCB",
+    "BIB"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:coal_block"
+    },
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "norsecraft:blastfurnace",
+    "count": 1,
+    "data": 0
+  }
+}

@@ -1,9 +1,11 @@
-package kanethornwyrd.mods.norsecraft.modules.metals.steel;
+package kanethornwyrd.mods.norsecraft.modules.metals.features;
 
 
 import kanethornwyrd.mods.norsecraft.Norsecraft;
 import kanethornwyrd.mods.norsecraft.moduleFramework.Feature;
 import kanethornwyrd.mods.norsecraft.modules.metals.blastFurnace.RecipesBlastFurnace;
+
+import kanethornwyrd.mods.norsecraft.modules.metals.steel.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,7 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import static kanethornwyrd.mods.norsecraft.modules.metals.ItemNames.STEELMATERIAL;
 
-public class SteelFeature extends Feature {
+public class Steel extends Feature {
 
 
 public static Item steelIngot;

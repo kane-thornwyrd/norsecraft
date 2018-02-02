@@ -4,8 +4,8 @@ import kanethornwyrd.mods.norsecraft.modules.core.items.ItemModSpade;
 import net.minecraft.item.ItemStack;
 
 import static kanethornwyrd.mods.norsecraft.modules.metals.ItemNames.DRAGONGLASSSHOVEL;
-import static kanethornwyrd.mods.norsecraft.modules.metals.dragonglass.DragonglassFeature.dragonglassIngot;
-import static kanethornwyrd.mods.norsecraft.modules.metals.dragonglass.DragonglassFeature.dragonglassMaterial;
+import static kanethornwyrd.mods.norsecraft.modules.metals.features.Dragonglass.dragonglassIngot;
+import static kanethornwyrd.mods.norsecraft.modules.metals.features.Dragonglass.dragonglassMaterial;
 
 
 public class ItemDragonglassShovel extends ItemModSpade {

@@ -1,9 +1,11 @@
-package kanethornwyrd.mods.norsecraft.modules.metals.dragonglass;
+package kanethornwyrd.mods.norsecraft.modules.metals.features;
 
 
 import kanethornwyrd.mods.norsecraft.Norsecraft;
 import kanethornwyrd.mods.norsecraft.moduleFramework.Feature;
 import kanethornwyrd.mods.norsecraft.modules.metals.blastFurnace.RecipesBlastFurnace;
+
+import kanethornwyrd.mods.norsecraft.modules.metals.dragonglass.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,9 +13,9 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import static kanethornwyrd.mods.norsecraft.modules.metals.ItemNames.DRAGONGLASSMATERIAL;
-import static kanethornwyrd.mods.norsecraft.modules.metals.steel.SteelFeature.steelIngot;
+import static kanethornwyrd.mods.norsecraft.modules.metals.features.Steel.steelIngot;
 
-public class DragonglassFeature extends Feature {
+public class Dragonglass extends Feature {
 
 
 public static Item dragonglassIngot;

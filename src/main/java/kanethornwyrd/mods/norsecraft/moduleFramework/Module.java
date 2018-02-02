@@ -16,175 +16,177 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static kanethornwyrd.mods.norsecraft.Misc.*;
+import static kanethornwyrd.mods.norsecraft.Misc.MOD_NAME;
 
 public class Module {
-    public final String name = makeName();
-    public final Map<String, Feature> features = new HashMap();
-    public final List<Feature> enabledFeatures = new ArrayList();
-    public boolean enabled;
+public final String name = makeName();
+public final Map<String, Feature> features = new HashMap();
+public final List<Feature> enabledFeatures = new ArrayList();
+public boolean enabled;
 
-    public void addFeatures() {
-        // NO-OP
+public void registerFeature( Feature feature ) {
+  registerFeature(feature, convertName(feature.getClass().getSimpleName()));
+}
+
+public void registerFeature( Feature feature, String name ) {
+  registerFeature(feature, name, true);
+}
+
+public String convertName( String origName ) {
+  String withSpaces = origName.replaceAll("(?<=.)([A-Z])", " $1").toLowerCase();
+  return Character.toUpperCase(withSpaces.charAt(0)) + withSpaces.substring(1);
+}
+
+public void registerFeature( Feature feature, String name, boolean enabledByDefault ) {
+  ModuleLoader.featureInstances.put(feature.getClass(), feature);
+  features.put(name, feature);
+  
+  feature.enabledByDefault = enabledByDefault;
+  feature.prevEnabled = false;
+  
+  feature.module = this;
+  feature.configName = name;
+  feature.configCategory = this.name + "." + name;
+}
+
+public void registerFeature( Feature feature, boolean enabledByDefault ) {
+  registerFeature(feature, convertName(feature.getClass().getSimpleName()), enabledByDefault);
+}
+
+public void setupConfig() {
+  if (features.isEmpty())
+    addFeatures();
+  
+  forEachFeature(feature -> {
+    ConfigHelper.needsRestart = feature.requiresMinecraftRestartToEnable();
+    feature.enabled = loadPropBool(feature.configName, feature.getFeatureDescription(), feature.enabledByDefault) && enabled;
+    
+    feature.setupConstantConfig();
+    
+    if (!feature.forceLoad && !GlobalConfig.enableAntiOverlap) {
+      String[] incompatibilities = feature.getIncompatibleMods();
+      if (incompatibilities != null) {
+        List<String> failiures = new ArrayList();
+        
+        for (String s : incompatibilities)
+          if (Loader.isModLoaded(s)) {
+            feature.enabled = false;
+            failiures.add(s);
+          }
+        
+        if (!failiures.isEmpty())
+          FMLLog.info("[Quark] '" + feature.configName + "' is forcefully disabled as it's incompatible with the following loaded mods: " + failiures);
+      }
     }
-
-    public void registerFeature(Feature feature) {
-        registerFeature(feature, convertName(feature.getClass().getSimpleName()));
+    
+    if (!feature.loadtimeDone) {
+      feature.enabledAtLoadtime = feature.enabled;
+      feature.loadtimeDone = true;
     }
-
-    public void registerFeature(Feature feature, boolean enabledByDefault) {
-        registerFeature(feature, convertName(feature.getClass().getSimpleName()), enabledByDefault);
+    
+    if (feature.enabled && !enabledFeatures.contains(feature))
+      enabledFeatures.add(feature);
+    else if (!feature.enabled && enabledFeatures.contains(feature))
+      enabledFeatures.remove(feature);
+    
+    feature.setupConfig();
+    
+    if (!feature.enabled && feature.prevEnabled) {
+      if (feature.hasSubscriptions())
+        MinecraftForge.EVENT_BUS.unregister(feature);
+      if (feature.hasTerrainSubscriptions())
+        MinecraftForge.TERRAIN_GEN_BUS.unregister(feature);
+      if (feature.hasOreGenSubscriptions())
+        MinecraftForge.ORE_GEN_BUS.unregister(feature);
+    } else if (feature.enabled && (feature.enabledAtLoadtime || !feature.requiresMinecraftRestartToEnable()) && !feature.prevEnabled) {
+      if (feature.hasSubscriptions())
+        MinecraftForge.EVENT_BUS.register(feature);
+      if (feature.hasTerrainSubscriptions())
+        MinecraftForge.TERRAIN_GEN_BUS.register(feature);
+      if (feature.hasOreGenSubscriptions())
+        MinecraftForge.ORE_GEN_BUS.register(feature);
     }
+    
+    feature.prevEnabled = feature.enabled;
+  });
+}
 
-    public String convertName(String origName) {
-        String withSpaces = origName.replaceAll("(?<=.)([A-Z])", " $1").toLowerCase();
-        return Character.toUpperCase(withSpaces.charAt(0)) + withSpaces.substring(1);
-    }
+public void addFeatures() {
+  // NO-OP
+}
 
-    public void registerFeature(Feature feature, String name) {
-        registerFeature(feature, name, true);
-    }
+public final void forEachFeature( Consumer<Feature> consumer ) {
+  features.values().forEach(consumer);
+}
 
-    public void registerFeature(Feature feature, String name, boolean enabledByDefault) {
-        ModuleLoader.featureInstances.put(feature.getClass(), feature);
-        features.put(name, feature);
+public final boolean loadPropBool( String propName, String desc, boolean default_ ) {
+  return ConfigHelper.loadPropBool(propName, name, desc, default_);
+}
 
-        feature.enabledByDefault = enabledByDefault;
-        feature.prevEnabled = false;
+public void preInit( FMLPreInitializationEvent event ) {
+  forEachEnabled(feature -> feature.preInit(event));
+}
 
-        feature.module = this;
-        feature.configName = name;
-        feature.configCategory = this.name + "." + name;
-    }
+public final void forEachEnabled( Consumer<Feature> consumer ) {
+  enabledFeatures.forEach(consumer);
+}
 
-    public void setupConfig() {
-        if (features.isEmpty())
-            addFeatures();
+public void init( FMLInitializationEvent event ) {
+  forEachEnabled(feature -> feature.init(event));
+}
 
-        forEachFeature(feature -> {
-            ConfigHelper.needsRestart = feature.requiresMinecraftRestartToEnable();
-            feature.enabled = loadPropBool(feature.configName, feature.getFeatureDescription(), feature.enabledByDefault) && enabled;
+public void postInit( FMLPostInitializationEvent event ) {
+  forEachEnabled(feature -> feature.postInit(event));
+}
 
-            feature.setupConstantConfig();
+public void finalInit( FMLPostInitializationEvent event ) {
+  forEachEnabled(feature -> feature.finalInit(event));
+}
 
-            if (!feature.forceLoad && !GlobalConfig.enableAntiOverlap) {
-                String[] incompatibilities = feature.getIncompatibleMods();
-                if (incompatibilities != null) {
-                    List<String> failiures = new ArrayList();
+@SideOnly(Side.CLIENT)
+public void preInitClient( FMLPreInitializationEvent event ) {
+  forEachEnabled(feature -> feature.preInitClient(event));
+}
 
-                    for (String s : incompatibilities)
-                        if (Loader.isModLoaded(s)) {
-                            feature.enabled = false;
-                            failiures.add(s);
-                        }
+@SideOnly(Side.CLIENT)
+public void initClient( FMLInitializationEvent event ) {
+  forEachEnabled(feature -> feature.initClient(event));
+}
 
-                    if (!failiures.isEmpty())
-                        FMLLog.info("[Quark] '" + feature.configName + "' is forcefully disabled as it's incompatible with the following loaded mods: " + failiures);
-                }
-            }
+@SideOnly(Side.CLIENT)
+public void postInitClient( FMLPostInitializationEvent event ) {
+  forEachEnabled(feature -> feature.postInitClient(event));
+}
 
-            if (!feature.loadtimeDone) {
-                feature.enabledAtLoadtime = feature.enabled;
-                feature.loadtimeDone = true;
-            }
+public void serverStarting( FMLServerStartingEvent event ) {
+  forEachEnabled(feature -> feature.serverStarting(event));
+}
 
-            if (feature.enabled && !enabledFeatures.contains(feature))
-                enabledFeatures.add(feature);
-            else if (!feature.enabled && enabledFeatures.contains(feature))
-                enabledFeatures.remove(feature);
+public boolean canBeDisabled() {
+  return true;
+}
 
-            feature.setupConfig();
+public boolean isEnabledByDefault() {
+  return true;
+}
 
-            if (!feature.enabled && feature.prevEnabled) {
-                if (feature.hasSubscriptions())
-                    MinecraftForge.EVENT_BUS.unregister(feature);
-                if (feature.hasTerrainSubscriptions())
-                    MinecraftForge.TERRAIN_GEN_BUS.unregister(feature);
-                if (feature.hasOreGenSubscriptions())
-                    MinecraftForge.ORE_GEN_BUS.unregister(feature);
-            } else if (feature.enabled && (feature.enabledAtLoadtime || !feature.requiresMinecraftRestartToEnable()) && !feature.prevEnabled) {
-                if (feature.hasSubscriptions())
-                    MinecraftForge.EVENT_BUS.register(feature);
-                if (feature.hasTerrainSubscriptions())
-                    MinecraftForge.TERRAIN_GEN_BUS.register(feature);
-                if (feature.hasOreGenSubscriptions())
-                    MinecraftForge.ORE_GEN_BUS.register(feature);
-            }
+String makeName() {
+  return getClass().getSimpleName().replaceAll(MOD_NAME, "").toLowerCase();
+}
 
-            feature.prevEnabled = feature.enabled;
-        });
-    }
+public String getModuleDescription() {
+  return "";
+}
 
-    public void preInit(FMLPreInitializationEvent event) {
-        forEachEnabled(feature -> feature.preInit(event));
-    }
+public final int loadPropInt( String propName, String desc, int default_ ) {
+  return ConfigHelper.loadPropInt(propName, name, desc, default_);
+}
 
-    public void init(FMLInitializationEvent event) { forEachEnabled(feature -> feature.init(event)); }
+public final double loadPropDouble( String propName, String desc, double default_ ) {
+  return ConfigHelper.loadPropDouble(propName, name, desc, default_);
+}
 
-    public void postInit(FMLPostInitializationEvent event) {
-        forEachEnabled(feature -> feature.postInit(event));
-    }
-
-    public void finalInit(FMLPostInitializationEvent event) {
-        forEachEnabled(feature -> feature.finalInit(event));
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void preInitClient(FMLPreInitializationEvent event) {
-        forEachEnabled(feature -> feature.preInitClient(event));
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void initClient(FMLInitializationEvent event) {
-        forEachEnabled(feature -> feature.initClient(event));
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void postInitClient(FMLPostInitializationEvent event) {
-        forEachEnabled(feature -> feature.postInitClient(event));
-    }
-
-    public void serverStarting(FMLServerStartingEvent event) {
-        forEachEnabled(feature -> feature.serverStarting(event));
-    }
-
-    public boolean canBeDisabled() {
-        return true;
-    }
-
-    public boolean isEnabledByDefault() {
-        return true;
-    }
-
-    String makeName() {
-        return getClass().getSimpleName().replaceAll(MOD_NAME, "").toLowerCase();
-    }
-
-    public String getModuleDescription() {
-        return "";
-    }
-
-    public final void forEachFeature(Consumer<Feature> consumer) {
-        features.values().forEach(consumer);
-    }
-
-    public final void forEachEnabled(Consumer<Feature> consumer) {
-        enabledFeatures.forEach(consumer);
-    }
-
-    public final int loadPropInt(String propName, String desc, int default_) {
-        return ConfigHelper.loadPropInt(propName, name, desc, default_);
-    }
-
-    public final double loadPropDouble(String propName, String desc, double default_) {
-        return ConfigHelper.loadPropDouble(propName, name, desc, default_);
-    }
-
-    public final boolean loadPropBool(String propName, String desc, boolean default_) {
-        return ConfigHelper.loadPropBool(propName, name, desc, default_);
-    }
-
-    public final String loadPropString(String propName, String desc, String default_) {
-        return ConfigHelper.loadPropString(propName, name, desc, default_);
-    }
+public final String loadPropString( String propName, String desc, String default_ ) {
+  return ConfigHelper.loadPropString(propName, name, desc, default_);
+}
 }

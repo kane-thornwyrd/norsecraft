@@ -1,12 +1,12 @@
 package kanethornwyrd.mods.norsecraft.modules.metals;
 
 import kanethornwyrd.mods.norsecraft.moduleFramework.Module;
-import kanethornwyrd.mods.norsecraft.modules.metals.blastFurnace.BlastFurnaceFeature;
+import kanethornwyrd.mods.norsecraft.modules.metals.features.BlastFurnace;
 
 
 
-import kanethornwyrd.mods.norsecraft.modules.metals.dragonglass.DragonglassFeature;
-import kanethornwyrd.mods.norsecraft.modules.metals.steel.SteelFeature;
+import kanethornwyrd.mods.norsecraft.modules.metals.features.Dragonglass;
+import kanethornwyrd.mods.norsecraft.modules.metals.features.Steel;
 
 
 public class Metals extends Module {
@@ -14,9 +14,9 @@ public class Metals extends Module {
 
 @Override
 public void addFeatures() {
-  registerFeature(new BlastFurnaceFeature());
-  registerFeature(new SteelFeature());
-  registerFeature(new DragonglassFeature());
+  registerFeature(new BlastFurnace());
+  registerFeature(new Steel());
+  registerFeature(new Dragonglass());
 }
 
 

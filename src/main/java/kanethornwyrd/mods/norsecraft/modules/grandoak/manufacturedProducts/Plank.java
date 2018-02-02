@@ -8,27 +8,27 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
 public class Plank extends ModBlock {
-  public Plank(){
-    super(BlockNames.GRANDOAKPLANK, Material.WOOD);
-  }
+public Plank() {
+  super(BlockNames.GRANDOAKPLANK, Material.WOOD);
+}
 
-  @Override
-  public IProperty getVariantProp() {
-    return null;
-  }
+@Override
+public IProperty getVariantProp() {
+  return null;
+}
 
-  @Override
-  public IProperty[] getIgnoredProperties() {
-    return new IProperty[0];
-  }
+@Override
+public IProperty[] getIgnoredProperties() {
+  return new IProperty[ 0 ];
+}
 
-  @Override
-  public EnumRarity getBlockRarity(ItemStack itemStack) {
-    return EnumRarity.COMMON;
-  }
+@Override
+public EnumRarity getBlockRarity( ItemStack itemStack ) {
+  return EnumRarity.COMMON;
+}
 
-  @Override
-  public Class getVariantEnum() {
-    return null;
-  }
+@Override
+public Class getVariantEnum() {
+  return null;
+}
 }

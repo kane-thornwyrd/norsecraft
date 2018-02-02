@@ -3,6 +3,8 @@ package kanethornwyrd.mods.norsecraft.modules.metals.blastFurnace;
 import kanethornwyrd.mods.norsecraft.Norsecraft;
 import kanethornwyrd.mods.norsecraft.modules.core.blocks.BlockFacing;
 import kanethornwyrd.mods.norsecraft.modules.core.blocks.tile.TileSimpleInventory;
+
+
 import kanethornwyrd.mods.norsecraft.modules.metals.lib.ModGuiHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -45,9 +47,9 @@ public static void setState( boolean active, World worldIn, BlockPos pos ) {
   IBlockState iblockstate = worldIn.getBlockState(pos);
   TileEntity tileentity = worldIn.getTileEntity(pos);
   if (active) {
-    worldIn.setBlockState(pos, BlastFurnaceFeature.blastFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+    worldIn.setBlockState(pos, kanethornwyrd.mods.norsecraft.modules.metals.features.BlastFurnace.blastFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
   } else {
-    worldIn.setBlockState(pos, BlastFurnaceFeature.blastFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+    worldIn.setBlockState(pos, kanethornwyrd.mods.norsecraft.modules.metals.features.BlastFurnace.blastFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
   }
   
   if (tileentity != null) {

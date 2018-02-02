@@ -31,7 +31,7 @@ public void preInit( FMLPreInitializationEvent event ) {
 
 @Override
 public void init( FMLInitializationEvent event ) {
-  OreDictionary.registerOre("plankWood", ProxyRegistry.newStack(grandOakPlank, 1, OreDictionary.WILDCARD_VALUE));
+  OreDictionary.registerOre("plankWood", ProxyRegistry.newStack(grandOakPlank, 1, 0));
 }
 
 @Override
