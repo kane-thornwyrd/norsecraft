@@ -3,6 +3,8 @@ package kanethornwyrd.mods.norsecraft.moduleFramework;
 import kanethornwyrd.mods.norsecraft.modules.core.Core;
 import kanethornwyrd.mods.norsecraft.modules.grandoak.GrandOak;
 import kanethornwyrd.mods.norsecraft.modules.metals.Metals;
+
+import kanethornwyrd.mods.norsecraft.modules.runes.Runes;
 import kanethornwyrd.mods.norsecraft.modules.weirwood.Weirwood;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -41,6 +43,7 @@ static {
   
   //registerModule(QuarkTweaks.class);
 //        registerModule(NorseBark.class);
+  registerModule(Runes.class);
   registerModule(Metals.class);
   registerModule(Weirwood.class);
   registerModule(GrandOak.class);

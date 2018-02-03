@@ -33,13 +33,13 @@ Random random;
 
 
 public BlastFurnace() {
-  super(BLASTFURNACE, Material.IRON, BLASTFURNACE);
+  super(BLASTFURNACE, Material.IRON);
   setHardness(5.0F);
   setResistance(10.0F);
   setSoundType(SoundType.METAL);
   setCreativeTab(Norsecraft.creativeTab.INSTANCE);
   setLightLevel(0.5F);
-  GameRegistry.registerTileEntity(TileEntityBlastFurnace.class, MOD_ID + ":" + BLASTFURNACE);
+  GameRegistry.registerTileEntity(TileEntityBlastFurnace.class, this.getPrefix() + BLASTFURNACE);
   random = new Random();
 }
 
